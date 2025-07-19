@@ -14,9 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('queries', function (Blueprint $table) {
-            $table->id();
-            $table->longText('query');
-            // $table->timestamps();
+            $table->increments('id');
+            $table->string('query');
         });
     }
 

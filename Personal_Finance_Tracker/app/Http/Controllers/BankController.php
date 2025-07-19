@@ -29,9 +29,12 @@ class BankController extends Controller
         $category_id = Arr::pluck($graphs, 'category_id');
         $category = Arr::pluck($graphs, 'category_name');
         $qty = Arr::pluck($graphs, 'qty');
-        // dd(gettype($category));
-        
-        return view('bank/graph', compact('category', 'qty'));
+
+        $bankGraphs = DB::select($query);
+        $tot = count($category_id);
+        // $bankGraphs = $graphs->pluck('category_name', 'qty');
+        // dd($bankGraphs);
+        return view('bank/graph', compact('tot','bankGraphs', 'category', 'qty'));
     }
 
     /**

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Query;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class QueryController extends Controller
 {
@@ -23,7 +25,7 @@ class QueryController extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
@@ -34,7 +36,14 @@ class QueryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputted = DB::table('queries')->insert([
+            'query' => $request->input('query'),
+        ]);
+
+        $id = Query::all()->last()->id;
+
+        $query = Query::all();
+        return view('create', compact('query'));
     }
 
     /**

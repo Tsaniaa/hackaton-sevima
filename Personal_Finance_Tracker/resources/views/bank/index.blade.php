@@ -6,8 +6,13 @@
         <div class="col-lg-8">
             <h3>Bank Transaction</h3>
         </div>
+    </div>
+    <div class="row">
         <div class="col-lg-4">
-            <a class="btn btn-primary" href="{{route('bank.create')}}" role="button">Link</a>
+            <a class="btn btn-primary" href="{{route('bank.create')}}" role="button">Add</a>
+        </div>
+        <div class="col-lg-4">
+            <a class="btn btn-primary" href="{{route('bank.graph')}}" role="button">Graph</a>
         </div>
     </div>
     <div class="row">

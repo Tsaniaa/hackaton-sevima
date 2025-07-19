@@ -4,29 +4,20 @@
     <div class="container pt-5">
         <div class="row">
             <div class="col-lg-8">
-                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-
-                <script>
-                const barColors = ["red", "green","blue","orange","brown"];
-
-                new Chart("myChart", {
-                type: "bar",
-                data: {
-                    labels: $category,
-                    datasets: [{
-                    backgroundColor: barColors,
-                    data: $qty
-                    }]
-                },
-                options: {
-                    legend: {display: false},
-                    title: {
-                    display: true,
-                    text: "Graphic"
-                    }
-                }
-                });
-                </script>
+                <table class="table table-striped-columns">
+                <tr>
+                    <th>Category</th>
+                    <th>Total Bank</th>
+                </tr>
+                @for ($i =0; $i<$tot; $i++) 
+                @foreach ($bankGraphs as $bankGraph)
+                <tr>
+                    <td>{{ $bankGraphs[$i]->category_name }}</td>
+                    <td>{{ $bankGraphs[$i]->qty }}</td>
+                </tr>
+                @endforeach
+                @endfor
+            </table>
             </div>
         </div>
     </div>
