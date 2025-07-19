@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bank;
 use App\Models\Category;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,6 +20,18 @@ class BankController extends Controller
         $banks = Bank::all();
 
         return view('bank/index', compact('banks'));
+    }
+
+    public function graph()
+    {
+        $query = 'select a.category_id as category_id, b.category as category_name, sum(a.qty) as qty from banks a join categories b on a.category_id = b.id group by a.category_id, b.category';
+        $graphs = collect(DB::select($query));
+        $category_id = Arr::pluck($graphs, 'category_id');
+        $category = Arr::pluck($graphs, 'category_name');
+        $qty = Arr::pluck($graphs, 'qty');
+        // dd(gettype($category));
+        
+        return view('bank/graph', compact('category', 'qty'));
     }
 
     /**
@@ -44,9 +57,14 @@ class BankController extends Controller
         for($i=0; $i<$count; $i++)
         {
             if (Category::where('category', 'like', '%'.$statementArray[$i].'%')->first() != null) {
-                $category_id = Category::where('category', 'like', '%'.$statementArray[$i].'%')->first()->id;
+                $category = Category::where('category', 'like', '%'.$statementArray[$i].'%')->first();
                 break;
             }
+        }
+        if ($category->id == null) {
+            $category_id = 1;
+        } else {
+            $category_id = $category->id;
         }
 
         DB::table('banks')->insert([
