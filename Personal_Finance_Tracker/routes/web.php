@@ -18,3 +18,5 @@ use App\Http\Controllers\BankController;
 //     return view('welcome');
 // });
 Route::get('/banks', [BankController::class, 'index'])->name('bank');
+Route::get('/bank-add', [BankController::class, 'create'])->name('bank.create');
+Route::post('/bank-add', [BankController::class, 'store'])->name('bank.store');

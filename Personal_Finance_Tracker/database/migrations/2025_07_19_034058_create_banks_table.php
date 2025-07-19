@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('banks', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('statement');
             $table->integer('qty');
-            $table->timestamps();
+            $table->date('date');
 
             $table->unsignedInteger('category_id')->references('categories')->on('id');
         });

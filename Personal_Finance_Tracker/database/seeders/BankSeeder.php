@@ -17,12 +17,13 @@ class BankSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('id_ID');
-        for ($i=1; $i<=50; $i++)
+        for ($i=1; $i<=25; $i++)
         {
             DB::table('banks')->insert([
-                'statement' => $faker->sentence(),
+                'statement' => $faker->realText($faker->numberBetween(20, 30)),
                 'qty' => $faker->numberBetween(1,10),
                 'category_id' => $faker->numberBetween(1,5),
+                'date' => $faker->dateTime()
             ]);
         }
     }

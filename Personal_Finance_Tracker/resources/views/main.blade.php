@@ -11,7 +11,7 @@
     <nav class="navbar bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{{route('bank')}}">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Coin_of_Maximian.jpg" alt="Bootstrap" width="100" height="100">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Coin_of_Maximian.jpg" alt="Bootstrap" width="100" height="100" style="border-radius: 50%">
             </a>
         </div>
     </nav>

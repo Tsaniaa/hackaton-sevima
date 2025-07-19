@@ -20,7 +20,7 @@ class CategorySeeder extends Seeder
         for ($i=1; $i<=10; $i++)
         {
             DB::table('categories')->insert([
-                'category' => $faker->sentence(),
+                'category' => $faker->realText($faker->numberBetween(10, 20)),
             ]);
         }
     }

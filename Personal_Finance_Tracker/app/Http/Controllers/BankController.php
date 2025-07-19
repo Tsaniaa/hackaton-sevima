@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bank;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BankController extends Controller
 {
@@ -26,7 +28,7 @@ class BankController extends Controller
      */
     public function create()
     {
-        //
+        return view('bank/create');
     }
 
     /**
@@ -37,7 +39,25 @@ class BankController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $statementArray = explode(' ', $request->statement);
+        $count = count($statementArray);
+        for($i=0; $i<$count; $i++)
+        {
+            if (Category::where('category', 'like', '%'.$statementArray[$i].'%')->first() != null) {
+                $category_id = Category::where('category', 'like', '%'.$statementArray[$i].'%')->first()->id;
+                break;
+            }
+        }
+
+        DB::table('banks')->insert([
+            'qty' => $request->qty,
+            'statement' => $request->statement,
+            'date' => $request->date,
+            'category_id' => $category_id,
+        ]);
+
+        $banks = Bank::all();
+        return view('bank/index', compact('banks'));
     }
 
     /**
